@@ -1,0 +1,7 @@
+{% extends "base.html" %} {% block content %}
+<h2 class="mt-5">Requested Page Not Found</h2>
+{% if current_user.is_authenticated %}
+<a href="{{ url_for('admin') }}" class="btn btn-primary">Go back</a>
+{% else %}
+<a href="{{ url_for('home') }}" class="btn btn-primary">Go back</a>
+{% endif %} {% endblock content %}

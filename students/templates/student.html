@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="jumbotron" style="color: #555">
+  <h2 class="display-5">{{ student.name }}</h2>
+  <hr class="my-4" />
+  <p class="lead">Email : {{ student.email }}</p>
+  <p class="lead">Phone : {{ student.phone }}</p>
+  <p class="lead">Class : {{ student.attended_class }}</p>
+  <hr class="my-4" />
+
+  <p class="lead">
+    <a
+      class="btn btn-primary"
+      href="{{ url_for('update_student', student_id=student.id) }}"
+      >Update</a
+    >
+    <button
+      class="btn btn-danger"
+      data-bs-toggle="modal"
+      data-bs-target="#deleteModal"
+    >
+      Delete
+    </button>
+  </p>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  aria-labelledby="deleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete This Student?</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">Are you sure to delete {{ student.name }}?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <form
+          action="{{ url_for('delete_student', student_id = student.id) }}"
+          method="post"
+        >
+          <input type="submit" class="btn btn-danger" value="Delete" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
